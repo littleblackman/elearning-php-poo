@@ -10,7 +10,7 @@
         </ul>
 
         <span id="author">
-            <img src="hand.jpg"/>
+            <img src="<?PHP echo ASSETS;?>hand.jpg"/>
              by Sandy
         </span>
     </nav>

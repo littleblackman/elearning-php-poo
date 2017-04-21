@@ -16,5 +16,3 @@ $req->execute(
 
 // redirection to prevent from a refresh
 header('Location: list.php');
-
-;?>

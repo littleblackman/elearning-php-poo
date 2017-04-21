@@ -1,4 +1,4 @@
-<form action="update.php" method="post">
+<form action="<?PHP echo HOST;?>update.php" method="post">
     <div class="form-group">
         <label>Titre: </label>
         <input name="title" class="form-control" />

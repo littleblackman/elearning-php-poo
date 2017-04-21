@@ -1,11 +1,5 @@
 <?php
-/******** RULES TO ORGANIZE YOUR CODE **************/
-/*
- * 2 parts in a page: the top with php, the bottom with html
- * all queries have to be in the php part, at the beginning
- * in html part, if you start with php, you have to close with php
- * don't repeat yourself, so use variables and "include" to factorise your code
- */
+include_once ('_config.php');
 
 // do the queries
 $bdd   = new PDO('mysql:host=localhost;dbname=my_library;charset=utf8', 'root', 'root');
@@ -27,9 +21,10 @@ while($row = $req->fetch(PDO::FETCH_ASSOC)) {
     $books[] = $book;
 }
 
+
 // include the doctype and the top of the page which is the same on all pages
-include_once ('_head.php');
-include_once ('_nav.php');
+include_once (PARTIAL.'_head.php');
+include_once (PARTIAL.'_nav.php');
 
 ;?>
 
@@ -53,7 +48,7 @@ include_once ('_nav.php');
 </section>
 
 <section id="add_book">
-    <?php include_once ('_form.php');?>
+    <?php include_once (PARTIAL.'_form.php');?>
 </section>
 
-<?php include_once ('_footer.php');?>
+<?php include_once (PARTIAL.'_footer.php');?>
