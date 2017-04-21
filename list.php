@@ -1,16 +1,3 @@
-<?php
-
-$all_books = array(
-                    array('title' => 'King Kong Théorie', 'author' => 'Virgine Despentes', 'description' => 'Essais sur le fénminisme', 'note' => 10),
-                    array('title' => 'Des lumières et des ombres', 'author' => 'Henri Alekan', 'description' => 'Essais sur la lumière', 'note' => 8),
-                    array('title' => 'Une brève histoire du temps', 'author' => 'Stephen Hawking', 'description' => 'Essais sur le fénminisme', 'note' => 10),
-                    array('title' => 'Shinning', 'author' => 'Stephen King', 'description' => 'Fantastique', 'note' => 7),
-                    array('title' => 'Fondation', 'author' => 'Isaac Asimov', 'description' => 'SF', 'note' => 10),
-                    array('title' => 'Aux sources d\'internet', 'author' => 'Alexandre Serres', 'description' => 'Essais sur internet', 'note' => 6),
-                );
-
-;?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -58,16 +45,49 @@ $all_books = array(
                     <th>Note</th>
                 </tr>
 
-                <?php foreach($all_books as $one_book) {;
-                    echo '<tr>';
-                    echo '<td>'.$one_book['title'].'</td>';
-                    echo '<td>'.$one_book['author'].'</td>';
-                    echo '<td>'.$one_book['description'].'</td>';
-                    echo '<td>'.$one_book['note'].'</td>';
-                    echo '</tr>';
-                };?>
+                <?php
+                    $bdd   = new PDO('mysql:host=localhost;dbname=my_library;charset=utf8', 'root', 'root');
+                    $query = "SELECT * FROM book";
+                    $req = $bdd->prepare($query);
+                    $req->execute();
+
+                    while($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<tr>';
+                        echo '<td>'.$row['title'].'</td>';
+                        echo '<td>'.$row['author'].'</td>';
+                        echo '<td>'.$row['description'].'</td>';
+                        echo '<td>'.$row['note'].'</td>';
+                        echo '</tr>';
+                    };?>
 
             </table>
+        </section>
+
+
+        <section id="add_book">
+            <form action="update.php" method="post">
+                <div class="form-group">
+                    <label>Titre: </label>
+                    <input name="title" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Auteur:</label>
+                    <input name="author" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>description:</label>
+                    <textarea name="description" class="form-control"></textarea>
+                </div>
+                <div class="selectbox">
+                    <label>Note sur 10:</label>
+                    <select name="note" class="form-select">
+                        <?php for($i = 1; $i <= 10; $i++ ) {
+                            echo '<option value="1">'.$i.'</option>';
+                            };?>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
         </section>
 
 
