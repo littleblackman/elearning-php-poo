@@ -1,23 +1,27 @@
 <?php
 include_once ('_config.php');
 
+// add the book class
+include_once(ROOT.'entity/book.php');
+
 // do the queries
 $bdd   = new PDO('mysql:host=localhost;dbname=my_library;charset=utf8', 'root', 'root');
 $query = "SELECT * FROM book";
 $req = $bdd->prepare($query);
 $req->execute();
 while($row = $req->fetch(PDO::FETCH_ASSOC)) {
-    // create one book (an array) with each line from the bdd
-    // notice that there is no "s" on $book
-    $book  = array(
-                        'title'         => $row['title'],
-                        'author'        => $row['author'],
-                        'description'   => $row['description'],
-                        'note'          => $row['note']
-                    );
 
-    // add this book in an global array : it's an array of array
-    // don't forget the "s" on $bookSSSS
+    // instance of a book object
+    $book = new Book();
+
+    // hydrate manualy from bdd datas
+    $book->setId($row['id']);
+    $book->setTitle($row['title']);
+    $book->setAuthor($row['author']);
+    $book->setDescription($row['description']);
+    $book->setNote($row['note']);
+
+    // now you have an array of object (instead of an array of array)
     $books[] = $book;
 }
 
@@ -31,6 +35,7 @@ include_once (PARTIAL.'_nav.php');
 <section id="list_book">
     <table class="table">
         <tr>
+            <th>Identification</th>
             <th>Titre</th>
             <th>Auteur</th>
             <th>Description</th>
@@ -38,10 +43,11 @@ include_once (PARTIAL.'_nav.php');
         </tr>
         <?php foreach($books as $book):?>
             <tr>
-                <td><?php echo $book['title'];?></td>
-                <td><?php echo $book['author'];?></td>
-                <td><?php echo $book['description'];?></td>
-                <td><?php echo $book['note'];?></td>
+                <td><?php echo $book->getPersonalIdentification();?></td>
+                <td><?php echo $book->getTitle()?></td>
+                <td><?php echo $book->getAuthor()?></td>
+                <td><?php echo $book->getDescription()?></td>
+                <td><?php echo $book->getNote()?></td>
             </tr>
         <?php endforeach;?>
     </table>
