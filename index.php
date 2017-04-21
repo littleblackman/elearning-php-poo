@@ -24,10 +24,10 @@
             <nav class="navbar navbar-default">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="index.html">Home</a>
+                        <a href="index.php">Home</a>
                     </li>
                     <li>
-                        <a href="list.html">Liste complète</a>
+                        <a href="list.php">Liste complète</a>
                     </li>
                 </ul>
 
