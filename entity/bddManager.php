@@ -13,5 +13,13 @@ class BddManager
         $this->bdd = $bdd;
     }
 
+    public function deleteById($table, $entity_id)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare("DELETE FROM ".$table." WHERE id = ".$entity_id);
+        $req->execute();
+
+    }
+
 }
 

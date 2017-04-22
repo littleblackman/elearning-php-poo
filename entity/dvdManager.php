@@ -101,18 +101,4 @@ class DvdManager  extends BddManager {
         return $dvd;
     }
 
-
-    /**
-     * delete a dvd from bdd
-     *
-     * @param $dvd_id
-     */
-    public function deleteById($dvd_id)
-    {
-        $bdd = $this->bdd;
-        $req = $bdd->prepare("DELETE FROM dvd WHERE id = ".$dvd_id);
-        $req->execute();
-    }
-
-
 }

@@ -102,17 +102,4 @@ class BookManager  extends BddManager {
     }
 
 
-    /**
-     * delete a book from bdd
-     *
-     * @param $book_id
-     */
-    public function deleteById($book_id)
-    {
-        $bdd = $this->bdd;
-        $req = $bdd->prepare("DELETE FROM book WHERE id = ".$book_id);
-        $req->execute();
-    }
-
-
 }

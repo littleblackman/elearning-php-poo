@@ -74,4 +74,17 @@ class Book {
         return $this->note;
     }
 
+    /**
+     * save the object
+     *
+     * @return $this
+     */
+    public function save()
+    {
+        // connect to bdd & save
+        $manager = new BookManager();
+        $manager->persist($this);
+        return $this;
+    }
+
 }

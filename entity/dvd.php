@@ -63,4 +63,18 @@ class Dvd {
         return $this->note;
     }
 
+    /**
+     * save the object
+     *
+     * @return $this
+     */
+    public function save()
+    {
+        // connect to bdd & save
+        $manager = new DvdManager();
+        $manager->persist($this);
+        return $this;
+    }
+
+
 }
