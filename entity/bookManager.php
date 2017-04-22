@@ -1,17 +1,6 @@
 <?php
 
-class BookManager  {
-
-    protected $bdd;
-    private $host      = "localhost";
-    private $login     = "root";
-    private $password  = "root";
-
-    public function __construct()
-    {
-        $bdd = new PDO('mysql:host='.$this->host.';dbname=my_library;charset=utf8', $this->login, $this->password);
-        $this->bdd = $bdd;
-    }
+class BookManager  extends BddManager {
 
     /**
      * return all books in bdd
@@ -30,11 +19,7 @@ class BookManager  {
             $book = new Book();
 
             // hydrate manualy from bdd datas
-            $book->setId($row['id']);
-            $book->setTitle($row['title']);
-            $book->setAuthor($row['author']);
-            $book->setDescription($row['description']);
-            $book->setNote($row['note']);
+            $book->hydrate($row);
 
             // now you have an array of object (instead of an array of array)
             $books[] = $book;
