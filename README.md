@@ -18,4 +18,6 @@ Here all branchs<br/><br/>
   <li>09-a-bddManager-to-add-class    Add a bddManager and extend it from other managers</li>
   <li>10-add-abstract-interface-trait Customize class with abstract, interfaces and traits</li>
 </ul>  
+
+<br/><br/>
   Next step ? .... MVC of course :-)
