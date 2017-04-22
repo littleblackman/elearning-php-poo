@@ -2,6 +2,8 @@
 
 class Book extends Media implements Saleable, Borrowing  {
 
+    use CleanData;
+
     protected $id = null;
     protected $title;
     protected $description;
@@ -13,7 +15,6 @@ class Book extends Media implements Saleable, Borrowing  {
     {
         foreach ($values as $key=>$value)
         {
-
             $method = 'set' . ucfirst($key);
             if (method_exists($this, $method))
             {
@@ -63,6 +64,7 @@ class Book extends Media implements Saleable, Borrowing  {
     }
 
     public function setAuthor($author) {
+        $author = $this->formatName($author);
         $this->author = $author;
     }
 
@@ -90,7 +92,7 @@ class Book extends Media implements Saleable, Borrowing  {
         $manager->persist($this);
         return $this;
     }
-    
+
     /**
      * return the type of media
      * this method is required when a class extend media
