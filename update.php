@@ -6,20 +6,17 @@ if(isset($_POST['values']))
 {
     $values = $_POST['values'];
 
-    // add the class
-    include_once(ROOT.'entity/book.php');
-    include_once(ROOT.'entity/bookManager.php');
-
     // create book from values
     $book = new Book();
     $book->hydrate($values);
 
     // connect to bdd & create
     $manager = new BookManager();
-    $manager->create($book);
-}
 
-exit;
+    // add a persist new method in manager
+    $manager->persist($book);
+
+}
 
 // redirection to prevent from a refresh
 header('Location: list.php');

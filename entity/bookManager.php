@@ -44,7 +44,44 @@ class BookManager  {
     }
 
     /**
-     * persist a book in bdd
+     * save the book in bdd
+     *
+     * @param Book $book
+     */
+    public function persist(Book $book)
+    {
+        if($book->getId() == null) {
+            $this->create($book);
+        } else {
+            $this->update($book);
+        }
+    }
+
+
+    /**
+     * update a book in bdd
+     * @param Book $book
+     * @return $this
+     */
+    public function update(Book $book) {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare("UPDATE book SET title = :title, description = :description, author = :author, note = :note WHERE id = :id");
+        $req->execute(
+            array(
+                'title'       => $book->getTitle(),
+                'description' => $book->getDescription(),
+                'author'      => $book->getAuthor(),
+                'note'        => $book->getNote(),
+                'id'          => $book->getId()
+            )
+        );
+        return $this;
+    }
+
+
+
+    /**
+     * create a new book in bdd
      *
      * @param Book $book
      * @return $this
@@ -62,6 +99,34 @@ class BookManager  {
             )
         );
         return $this;
+    }
+
+    public function getBookById($book_id)
+    {
+        $bdd = $this->bdd;
+        $query = "SELECT * FROM book WHERE id = ".$book_id;
+        $req = $bdd->prepare($query);
+        $req->execute();
+
+        $row = $req->fetch(PDO::FETCH_ASSOC);
+
+        $book = new Book();
+        $book->hydrate($row);
+
+        return $book;
+    }
+
+
+    /**
+     * delete a book from bdd
+     *
+     * @param $book_id
+     */
+    public function deleteById($book_id)
+    {
+        $bdd = $this->bdd;
+        $req = $bdd->prepare("DELETE FROM book WHERE id = ".$book_id);
+        $req->execute();
     }
 
 

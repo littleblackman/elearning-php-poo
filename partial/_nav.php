@@ -7,6 +7,9 @@
             <li>
                 <a href="list.php">Liste complète</a>
             </li>
+            <li>
+                <a href="edit.php">Ajouter un livre</a>
+            </li>
         </ul>
 
         <span id="author">
