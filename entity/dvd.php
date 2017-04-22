@@ -1,6 +1,6 @@
 <?php
 
-class Dvd {
+class Dvd extends Media{
 
     protected $id = null;
     protected $title;
@@ -13,7 +13,6 @@ class Dvd {
     {
         foreach ($values as $key=>$value)
         {
-
             $method = 'set' . ucfirst($key);
             if (method_exists($this, $method))
             {

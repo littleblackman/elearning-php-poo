@@ -1,6 +1,6 @@
 <?php
 
-class Book {
+class Book extends Media implements Saleable, Borrowing  {
 
     protected $id = null;
     protected $title;
@@ -46,6 +46,10 @@ class Book {
         $this->title = $title;
     }
 
+    /**
+     * this method is required when a class extend media
+     * @return mixed
+     */
     public function getTitle() {
         return $this->title;
     }
@@ -85,6 +89,41 @@ class Book {
         $manager = new BookManager();
         $manager->persist($this);
         return $this;
+    }
+    
+    /**
+     * return the type of media
+     * this method is required when a class extend media
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return "book";
+    }
+
+    /**
+     *  Interface Saleable
+     */
+    public function getPrice()
+    {
+        // TODO: Implement getPrice() method.
+    }
+
+    /**
+     *  Interface Borrowing
+     */
+    public function getDateFrom()
+    {
+        // TODO: Implement getDateFrom() method.
+    }
+
+    /**
+     *  Interface Borrowing
+     */
+    public function getPersonName()
+    {
+        // TODO: Implement getPersonName() method.
     }
 
 }
