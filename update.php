@@ -1,18 +1,25 @@
 <?php
+include_once ('_config.php');
 
-// connect to bdd
-$bdd   = new PDO('mysql:host=localhost;dbname=my_library;charset=utf8', 'root', 'root');
+// retrieve post values
+if(isset($_POST['values']))
+{
+    $values = $_POST['values'];
 
-// insert in bdd
-$req = $bdd->prepare("INSERT INTO book (title, description, author, note) VALUES (:title, :description, :author, :note)");
-$req->execute(
-    array(
-        'title'       => $_POST['title'],
-        'description' => $_POST['description'],
-        'author'      => $_POST['author'],
-        'note'        => $_POST['note'],
-    )
-);
+    // add the class
+    include_once(ROOT.'entity/book.php');
+    include_once(ROOT.'entity/bookManager.php');
+
+    // create book from values
+    $book = new Book();
+    $book->hydrate($values);
+
+    // connect to bdd & create
+    $manager = new BookManager();
+    $manager->create($book);
+}
+
+exit;
 
 // redirection to prevent from a refresh
 header('Location: list.php');
