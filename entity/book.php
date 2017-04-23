@@ -63,6 +63,10 @@ class Book extends Media implements Saleable, Borrowing  {
         return $this->description;
     }
 
+    /**
+     * Format the name by using a trait
+     * @param $author
+     */
     public function setAuthor($author) {
         $author = $this->formatName($author);
         $this->author = $author;
