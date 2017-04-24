@@ -10,19 +10,6 @@ class Book extends Media implements Saleable, Borrowing  {
     protected $author;
     protected $note;
 
-
-    public function hydrate(Array $values)
-    {
-        foreach ($values as $key=>$value)
-        {
-            $method = 'set' . ucfirst($key);
-            if (method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
-
     public function setId($id) {
         $this->id = $id;
     }

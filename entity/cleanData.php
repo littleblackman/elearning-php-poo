@@ -2,6 +2,13 @@
 
 trait CleanData {
 
+    /**
+     *
+     * add upper character on each word of a name
+     *
+     * @param $string
+     * @return string
+     */
     public function formatName($string)
     {
         $elements = explode(' ', $string);
