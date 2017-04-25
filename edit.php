@@ -23,4 +23,3 @@ include_once (PARTIAL.'_nav.php');
 </section>
 
 <?php include_once (PARTIAL.'_footer.php');?>
-

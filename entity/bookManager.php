@@ -25,7 +25,6 @@ class BookManager  extends BddManager {
             $books[] = $book;
         }
         return $books;
-
     }
 
     /**
